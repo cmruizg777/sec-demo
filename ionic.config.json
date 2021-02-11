@@ -1,0 +1,7 @@
+{
+  "name": "sec-demo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
