@@ -1,0 +1,17 @@
+<ng-container *ngIf="usuario ">
+  <ion-card>
+    <ion-card-header>
+      <!--ion-card-subtitle>{{usuario.perfil.cargo.nombre}}</ion-card-subtitle-->
+      <ion-card-title>usuario: {{usuario.username}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        Bienvenido {{usuario.perfil.nombres}}
+      </p>
+      <p>
+        Cargo: {{usuario.cargo.textopararol}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ng-container>
+
