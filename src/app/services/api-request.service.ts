@@ -18,7 +18,7 @@ export class ApiRequestService {
     return this.http.post<Usuario>(url,{});
   }
   getFile(){
-    const url = `${this.uri}/user/download?id=3`;
+    const url = `${this.uri}/user/download?id=5`;
     return this.http.get(url, {
       responseType: 'blob'
     });

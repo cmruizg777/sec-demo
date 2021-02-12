@@ -3,6 +3,7 @@ import { PerfilComponent } from './../perfil/perfil.component';
 import { LoadingController } from '@ionic/angular';
 import { ApiRequestService } from '../services/api-request.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { LocationService } from '../services/location.service';
 
 @Component({
   selector: 'app-home',
@@ -16,25 +17,28 @@ export class HomePage {
   constructor(
     private loadingController:LoadingController,
     private api: ApiRequestService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private geo: LocationService
   ) {}
   async ngOnInit() {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    this.geo.getCurrentPosition().then();
     this.download();
     this.myLoading = await this.loadingController.create({
       cssClass: 'my-custom-class',
       message: 'Espere por favor...',
       spinner: 'dots',
     });
-    await this.myLoading.present();
+    this.myLoading.present();
   }
 
 
   async onLoaded(event){
-    console.log('me ha enviado', event)
     if(event){
       await this.myLoading.dismiss();
+    }else{
+      await this.myLoading.present();
     }
   }
 

@@ -17,7 +17,6 @@ export class PerfilComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loaded.emit(false);
     this.api.obtenerPerfil().subscribe((user:any) => {
       if(user){
         this.usuario = user.profile;
