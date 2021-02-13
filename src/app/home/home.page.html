@@ -22,7 +22,12 @@
     <app-perfil (loaded)="onLoaded($event)">
     </app-perfil>
   </div>
-  <div class="container-fluid">
-    <app-guardia></app-guardia>
-  </div>
+  <ng-container *ngIf="true; else elseTemplate">
+    <div class="container-fluid" >
+      <app-guardia></app-guardia>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <!--supervisor-->
+  </ng-template>
 </ion-content>
