@@ -1,0 +1,23 @@
+<ion-list>
+  <ng-container *ngIf="asignaciones">
+    <ion-list-header>
+      Puestos Asignados
+    </ion-list-header>
+    <ion-item *ngFor="let asignacion of asignaciones">
+      <ion-avatar slot="start">
+        <img src="./../../assets/img/security.jpg">
+      </ion-avatar>
+      <ion-label>
+        <p>Puesto de Trabajo :</p>
+        <h2> {{asignacion.puesto.nombre}}</h2>
+        <h3>Provincia: {{asignacion.puesto.provincia.nombre}}</h3>
+        <p>- Días: <span *ngFor="let dia of asignacion.dias">{{dia.nombre}}</span>-</p>
+        <p *ngIf="asignacion.horario">Horario : {{asignacion.horario.entrada|date: 'HH:mm':'GMT+0000' }} - {{asignacion.horario.salida | date: 'HH:mm':'GMT+0000'}}</p>
+      </ion-label>
+      <ion-badge slot="end" color="primary" >
+        ENTRAR
+      </ion-badge>
+    </ion-item>
+  </ng-container>
+
+</ion-list>

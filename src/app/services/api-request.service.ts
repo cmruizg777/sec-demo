@@ -5,7 +5,8 @@ import { Usuario } from '../clases/perfil';
   providedIn: 'root'
 })
 export class ApiRequestService {
-  uri = 'http://localhost:8000/api';
+  //uri = 'http://localhost:8000/api';
+  uri =  'http://186.4.154.145:8080/sec-demo-api/public/index.php/api';
   constructor(
     private http: HttpClient
     ) { }
@@ -18,13 +19,17 @@ export class ApiRequestService {
     return this.http.post<Usuario>(url,{});
   }
   getFile(){
-    const url = `${this.uri}/user/download?id=3`;
+    const url = `${this.uri}/user/download?id=8`;
     return this.http.get(url, {
       responseType: 'blob'
     });
   }
-  sendPhoto(formData){
-    const url = `${this.uri}/user/upload`;
+  getPuestos(){
+    const url = `${this.uri}/v1/puestos`;
+    return this.http.get(url);
+  }
+  sendPhoto(formData, id){
+    const url = `${this.uri}/v1/reporte/upload/${id}`;
     return this.http.post(url, formData);
   }
   reportarLlegada(formData){

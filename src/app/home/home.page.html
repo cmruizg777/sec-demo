@@ -12,22 +12,39 @@
       <ion-title size="large">Security Demo</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ng-container *ngIf="imagen; else elseTemplate">
+  <!--ng-container *ngIf="imagen; else elseTemplate">
     <img [src]="imagen" alt="">
   </ng-container>
   <ng-template #elseTemplate>
     cargando ...
-  </ng-template>
+  </ng-template-->
   <div class="container">
-    <app-perfil (loaded)="onLoaded($event)">
+    <app-perfil (loaded)="onLoadedPerfil($event)">
     </app-perfil>
   </div>
-  <ng-container *ngIf="true; else elseTemplate">
+  <ng-container *ngIf="role == 'ROLE_GUARDIA'">
     <div class="container-fluid" >
-      <app-guardia></app-guardia>
+      <app-guardia
+      (loaded)="onLoadedGuardia($event)"
+      ></app-guardia>
     </div>
   </ng-container>
-  <ng-template #elseTemplate>
-    <!--supervisor-->
-  </ng-template>
+  <ng-container *ngIf="role == 'ROLE_SUPERVISOR'">
+    <!--div class="container gmaps">
+        <google-maps
+      [apiKey]="apikey"
+      (loaded)="onLoadedGoogleMaps($event)" >
+      </google-maps>
+    </div-->
+    <app-supervisor [asignaciones]="asignaciones"></app-supervisor>
+  </ng-container>
+  <ion-footer>
+    <ion-item>
+      <button (click)="logout()" class="btn btn-danger btn-block">
+        Cerrar Sesión
+      </button>
+    </ion-item>
+  </ion-footer>
+  <!--ion-footer>
+  </ion-footer-->
 </ion-content>

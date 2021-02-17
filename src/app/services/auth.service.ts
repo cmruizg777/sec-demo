@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { stat } from 'fs';
 import { Subject } from 'rxjs';
 import { AuthResponse } from '../clases/auth';
 import { ApiRequestService } from './api-request.service';
@@ -43,7 +44,14 @@ export class AuthService {
   userStatus(){
     return this.logged$.asObservable();
   }
-
+  checkStatus(){
+    let token = localStorage.getItem('token');
+    if(token){
+      this.state = true;
+    }
+    this.logged$.next(this.state);
+    return this.state;
+  }
   logout(){
     localStorage.clear();
     this.router.navigate(['/login']);

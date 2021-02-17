@@ -1,0 +1,13 @@
+ion-footer{
+  position: fixed;
+  bottom: 0%;
+}
+div.gmaps {
+  min-height: 50% !important;
+  google-maps{
+    width: 100% !important;
+    height: 50vh !important;
+    min-height: 50vh !important;
+    display: block;
+  }
+}

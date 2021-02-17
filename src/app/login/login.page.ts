@@ -18,14 +18,18 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = '2300276546';
+    //this.user = '0401702832';//guardia
+    this.user = '1718783010'; //supervisor
     this.pass = '123456';
-    localStorage.clear();
+    //localStorage.clear();
+
     this.auth.userStatus().subscribe( logged => {
       if(logged){
           this.navCtrl.navigateForward('/home');
       }
     });
+    this.auth.checkStatus();
+
   }
   enviar(){
     if(this.user && this.pass){
