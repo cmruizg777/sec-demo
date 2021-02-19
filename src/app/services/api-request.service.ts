@@ -19,7 +19,7 @@ export class ApiRequestService {
     return this.http.post<Usuario>(url,{});
   }
   getFile(){
-    const url = `${this.uri}/user/download?id=8`;
+    const url = `${this.uri}/user/fotos/download?id=8`;
     return this.http.get(url, {
       responseType: 'blob'
     });
@@ -29,7 +29,7 @@ export class ApiRequestService {
     return this.http.get(url);
   }
   sendPhoto(formData, id){
-    const url = `${this.uri}/v1/reporte/upload/${id}`;
+    const url = `${this.uri}/v1/fotos/upload/${id}`;
     return this.http.post(url, formData);
   }
   reportarLlegada(formData){
