@@ -12,11 +12,19 @@
         <h2> {{asignacion.puesto.nombre}}</h2>
         <h3>Provincia: {{asignacion.puesto.provincia.nombre}}</h3>
         <p>- Días: <span *ngFor="let dia of asignacion.dias">{{dia.nombre}}</span>-</p>
-        <p *ngIf="asignacion.horario">Horario : {{asignacion.horario.entrada|date: 'HH:mm':'GMT+0000' }} - {{asignacion.horario.salida | date: 'HH:mm':'GMT+0000'}}</p>
+        <p *ngIf="asignacion.horario">Horario : {{asignacion.horario.entrada|date: 'HH:mm':'GMT-0500' }} - {{asignacion.horario.salida | date: 'HH:mm':'GMT-0500'}}</p>
       </ion-label>
-      <ion-badge slot="end" color="primary" >
-        ENTRAR
-      </ion-badge>
+      <ng-container *ngIf="role == 'ROLE_GUARDIA'">
+        <ion-badge slot="end" color="danger" [routerLink]="['/guardia', asignacion.puesto.id]">
+          ENTRAR
+        </ion-badge>
+      </ng-container>
+      <ng-container *ngIf="role == 'ROLE_SUPERVISOR'">
+        <ion-badge slot="end" color="primary" [routerLink]="['/supervisor', asignacion.puesto.id]">
+          ENTRAR
+        </ion-badge>
+      </ng-container>
+
     </ion-item>
   </ng-container>
 

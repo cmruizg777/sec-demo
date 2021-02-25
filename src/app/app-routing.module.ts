@@ -17,6 +17,14 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {
+    path: 'guardia/:id',
+    loadChildren: () => import('./guardia/guardia.module').then( m => m.GuardiaPageModule)
+  },
+  {
+    path: 'supervisor/:id',
+    loadChildren: () => import('./supervisor/supervisor.module').then( m => m.SupervisorPageModule)
+  },
 
 ];
 

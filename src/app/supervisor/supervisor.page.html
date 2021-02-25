@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Regresar" defaultHref="home" color="primary"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Fecha: </ion-label>
+    <ion-datetime displayFormat="YYYY-MM-DD"
+     placeholder="Fecha" max="{{fecha | date: 'yyyy-MM-dd'}}" [(ngModel)]="strFecha" (ngModelChange)="dateChange()" >
+    </ion-datetime>
+  </ion-item>
+  <div class="container">
+    <ion-list>
+      <ng-container *ngIf="reportes">
+        <ion-list-header>
+          Listado de Reportes
+        </ion-list-header>
+        <ion-item *ngFor="let reporte of reportes">
+          <ion-avatar slot="start">
+            <img src="./../../assets/img/security.jpg">
+          </ion-avatar>
+          <ion-label>
+            <h3>Reporte de : {{reporte.tipo.nombre}}</h3>
+            <p>Fecha : {{reporte.fecha|date: 'dd-MM-yyyy':'GMT-0500' }}</p>
+            <p>Horario : {{reporte.hora|date: 'HH:mm':'GMT-0500' }}</p>
+            <p>Realizado por: </p>
+            <p>{{reporte.usuario.nombreCompleto }}</p>
+          </ion-label>
+          <ion-badge slot="end" color="primary" [routerLink]="['reporte', reporte.id]">
+              Ver
+          </ion-badge>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </div>
+</ion-content>

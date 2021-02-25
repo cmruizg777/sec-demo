@@ -1,3 +1,43 @@
-<p>
-  reportes works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Regresar" defaultHref="home" color="primary"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container *ngIf="reporte;">
+    <div class="datos">
+      <ion-item-group>
+        <ion-item>
+          Reportante: {{reporte.usuario.nombreCompleto}}
+        </ion-item>
+        <ion-item>
+          Puesto de Trabajo: {{reporte.puesto.nombre}}
+        </ion-item>
+        <ion-item>
+          Cliente: {{reporte.puesto.cliente.nombre}}
+        </ion-item>
+        <ion-item>
+          Tipo de Reporte: {{reporte.tipo.nombre}}
+        </ion-item>
+        <ion-item>
+          Fecha: {{reporte.fecha|date: 'dd-MM-yyyy':'GMT-0500' }}
+        </ion-item>
+        <ion-item>
+          Hora: {{reporte.hora|date: 'HH:mm':'GMT-0500' }}
+        </ion-item>
+        <ion-item *ngIf="reporte.descripcion">
+          Observación: {{reporte.descripcion}}
+        </ion-item>
+      </ion-item-group>
+    </div>
+    <div class="galeria">
+      <app-fotos [fotos]="reporte.fotos"></app-fotos>
+    </div>
+    <div class="mapa" *ngIf="reporte.ubicacion">
+      <google-maps [gpsPuesto]="reporte.puesto.ubicacion" [gpsReporte]="reporte.ubicacion"></google-maps>
+    </div>
+  </ng-container>
+</ion-content>

@@ -16,8 +16,10 @@ declare var google: any;
 })
 export class GoogleMapsComponent {
 
-    @Input('apiKey') apiKey: string;
-
+    @Input() gpsReporte;
+    @Input() gpsPuesto;
+    center;
+    reporte;
     markers: any[] = [];
     markersMap: any[] = [];
     miUbicacion ;
@@ -39,17 +41,40 @@ export class GoogleMapsComponent {
       ){
     }
 
-    async ngOnInit(){
-        await this.init();
+    ngOnInit(){
+      if(this.gpsPuesto){
+        this.center = {
+          coords:{
+            latitude: this.gpsPuesto.latitud,
+            longitude: this.gpsPuesto.longitud
+          }
+        };
+      }
+      if(this.gpsReporte){
+          this.reporte = {
+            coords:{
+              latitude: this.gpsReporte.latitud,
+              longitude: this.gpsReporte.longitud
+            }
+          };
+
+      }
     }
 
-    async init(): Promise<any> {
-        const location =  await  this.geo.getCurrentPosition();
+    ngAfterViewInit(): void {
+      //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+      //Add 'implements AfterViewInit' to the class.
+      this.init(this.center);
+      this.agregarMarker(this.reporte, 'Lugar de Reporte');
+    }
+    init(location){
+        //const location =  await  this.geo.getCurrentPosition();
         this.map = new google.maps.Map(this.mapElement.nativeElement, {
           center: { lat: location.coords.latitude, lng: location.coords.longitude },
           zoom: 15
         });
-        this.agregarMarker(location, 'Tu ubicación');
+        //const location = new
+        this.agregarMarker(location, 'Puesto de Trabajo');
     }
     agregarMarker(location, lugar) {
       const marker = new google.maps.Marker({
@@ -59,10 +84,13 @@ export class GoogleMapsComponent {
       });
       marker.setLabel(lugar);
       this.markersMap.push(marker);
-      //const sw = new google.maps.LatLng ({lat: this.minLat, lng: this.minLng});
-      //const ne = new google.maps.LatLng ({lat: this.maxLat, lng: this.maxLng});
-      //const bounds = new google.maps.LatLngBounds(sw, ne);
-      //this.map.fitBounds(bounds);
+
+    }
+    setBounds(){
+      const sw = new google.maps.LatLng ({lat: this.minLat, lng: this.minLng});
+      const ne = new google.maps.LatLng ({lat: this.maxLat, lng: this.maxLng});
+      const bounds = new google.maps.LatLngBounds(sw, ne);
+      this.map.fitBounds(bounds);
     }
     /*
     private loadSDK(): Promise<any> {

@@ -28,7 +28,6 @@ export class HomePage {
   constructor(
     private loadingController:LoadingController,
     private api: ApiRequestService,
-    private sanitizer: DomSanitizer,
     private auth:AuthService
   ) {}
   async ngOnInit() {
@@ -70,14 +69,7 @@ export class HomePage {
 
     }
   }
-  download(): void {
-    this.api.getFile()
-      .subscribe(blob => {
-        const objectUrl = URL.createObjectURL(blob)
-        this.imagen = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
-        //URL.revokeObjectURL(objectUrl);
-      })
-  }
+
   logout(){
     this.auth.logout();
   }
